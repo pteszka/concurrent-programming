@@ -1,0 +1,6 @@
+# vs code directories 
+.vscode/*
+
+# virtual envs
+.venv/*
+venv/*

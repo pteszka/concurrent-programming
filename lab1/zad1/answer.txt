@@ -1,0 +1,8 @@
+./skrypt1.sh & ./skrypt2.sh & ./skrypt3.sh
+
+a)
+ps -aux | grep skryptX.sh
+sudo kill -9 PID
+
+b) ctrl+C 
+    killall [name_of_the_script]
