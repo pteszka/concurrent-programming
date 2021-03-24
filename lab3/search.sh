@@ -13,7 +13,7 @@ do
     
     # dir
     if [ -d "$file" ]; then
-        # some filler var as 3rd var
+        # add some filler var as 3rd parameter
         ./search.sh "$file" "$2" filler &
         wait $!
         # if successful - flag=0
