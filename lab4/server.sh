@@ -3,36 +3,31 @@
 server="serwerfifo";
 client="klientfifo";
 
+trap "" SIGHUP
+trap "" SIGTERM
+trap "rm -f $server; exit 0" SIGUSR1
+
 # if server get any parameter
-if [ ! $# -eq 0 ] ; then
-    x=$(head -n 1 $server | awk  '{print $2}')
-    echo $(($x*2)) > $client
+if [[ ! $# -eq 0 ]] ; then
+    echo $(($1*2)) > $client
     exit 0
 fi
 
 # create server if not exists
-if [ ! -f "$server" ]; then
-    > $server
+if [[ ! -p "$server" ]]; then
+    mkfifo $server
 fi
 
 while true 
 do
-    if [ -s "$server" ]; then
-        $0 filler &
+    if read line < $server; then
+        x=$(echo "$line" | awk '{print $2}')
+        if [[ $x == "end" ]]; then
+            kill -SIGUSR1 $$
+        fi
+        $0 $x &
+        wait $!
     fi
 done
 
-
-# mkfifo $server_fifo;
-
-# while true
-# do
-#     # -p True if FILE exists and is a named pipe (FIFO).
-#     if [ -p $client_fifo ] ;
-#     then
-#         line=$(head -n 1 data);
-#         x=$($line | awk  '{print $2}');
-#         echo $(($x*2)) > $client_fifo
-#     fi
-# done
 exit 0

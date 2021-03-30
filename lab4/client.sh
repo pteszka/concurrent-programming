@@ -3,20 +3,34 @@
 server="serwerfifo"
 client="klientfifo"
 
-if [ ! -f "$client" ]; then
-    > $client
+trap "rm -f $client; exit 0" EXIT
+
+# -f dont work
+if [[ ! -p "$server" ]]; then
+    echo "Server is down."
+    exit 1
 fi
 
-echo -n "Enter number: "
-read x
-echo "$(realpath "$0") $x" > $server
+if [[ ! -f "$client" ]]; then
+    mkfifo $client
+fi
 
-while true
+printf "Enter the number: "
+read x
+
+# write to serwerfifo path $(realpath "$0")
+echo "$HOME $x" > $server
+
+if [[ $x == "end" ]]; then
+    echo "Server is down."
+    exit 0
+fi
+
+
+while true 
 do
-    if [ -s "$client" ] ; then
-        echo $(head -n 1 $client)
+    if read line < $client; then
+        echo "2*$x = $line"
         exit 0
     fi
 done
-
-exit 0

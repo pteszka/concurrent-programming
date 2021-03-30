@@ -5,7 +5,7 @@ flag=1
 
 for file in $1/*
 do
-    # our file
+    # file
     if [ -f "$file" ] && [ "$(basename $file)" = "$2" ]; then
         flag=0
         echo "$1"
@@ -23,7 +23,7 @@ do
     fi
 done
 
-if [[ ! $# -eq 3 ]]; then
+if [[ $# -eq 2 ]]; then
     if [[ $flag -eq 1 ]]; then
         echo "Nie znaleziono $2"
     fi
