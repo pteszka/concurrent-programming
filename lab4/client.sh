@@ -15,11 +15,11 @@ if [[ ! -f "$client" ]]; then
     mkfifo $client
 fi
 
-printf "Enter the number: "
+printf "Enter a number: "
 read x
 
-# write to serwerfifo path $(realpath "$0")
-echo "$HOME $x" > $server
+# write to serwerfifo path of client and number
+echo "$(realpath "$0") $x" > $server
 
 if [[ $x == "end" ]]; then
     echo "Server is down."
@@ -30,7 +30,10 @@ fi
 while true 
 do
     if read line < $client; then
-        echo "2*$x = $line"
+        result=$(echo "$line" | awk '{print $1}')
+        user=$(echo "$line" | awk '{print $2}')
+        echo "2*$x = $result"
+        echo "server: $user"
         exit 0
     fi
 done

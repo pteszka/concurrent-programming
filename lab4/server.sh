@@ -9,7 +9,7 @@ trap "rm -f $server; exit 0" SIGUSR1
 
 # if server get any parameter
 if [[ ! $# -eq 0 ]] ; then
-    echo $(($1*2)) > $client
+    echo "$(($1*2)) $USER" > $client
     exit 0
 fi
 
