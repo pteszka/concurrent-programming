@@ -1,0 +1,22 @@
+db = {
+    1: 'Nowak', 
+    2: 'Kowalski', 
+    3: 'Wiśniewski',
+    4: 'Dąbrowski',
+    5: 'Lewandowski', 
+    6: 'Wójcik', 
+    7: 'Kamiński', 
+    8: 'Kowalczyk', 
+    9: 'Zieliński', 
+    10: 'Szymański',
+    11: 'Bąk',
+    12: 'Chmielewski',
+    13: 'Włodarczyk',
+    14: 'Borkowski',
+    15: 'Czarnecki',
+    16: 'Sawicki',
+    17: 'Sokołowski',
+    18: 'Urbański',
+    19: 'Kubiak',
+    20: 'Maciejewski'
+}
