@@ -31,8 +31,8 @@ def get_response_from_server(CLIENT_FIFO):
 
 
 if __name__ == "__main__":
-    id = sys.argv[1]
-    path_to_clientfifo = sys.argv[2]
+    path_to_clientfifo = sys.argv[1]
+    id = sys.argv[2]
     # Make the client named pipe
     os.mkfifo(path_to_clientfifo)
     try:
