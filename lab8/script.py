@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import threading
 import sys
 
@@ -37,7 +39,7 @@ def main():
 
 	lock = threading.Lock()
 
-	arr = [i for i in range(8436378)]
+	arr = [i for i in range(100000)]
 	n = int(input("Podaj liczbę wątków: "))
 
 	threads = make_threads(arr, n, lock)

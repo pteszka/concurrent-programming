@@ -15,8 +15,6 @@ def send_response(res, path_to_clientfifo):
     client_fifo = os.open(path_to_clientfifo, os.O_WRONLY)
     msg = create_msg(res.encode("utf8"))
     os.write(client_fifo, msg)
-    # finally:
-    #     os.close(client_fifo)
 
 
 if __name__ == "__main__":
@@ -31,8 +29,8 @@ if __name__ == "__main__":
             poll.register(server_fifo, select.POLLIN)
             try:
                 while True:
-                    # Check if there's data to read. Timeout after 1 sec.
-                    if (server_fifo, select.POLLIN) in poll.poll(1000):
+                    # Check if there's data to read.
+                    if (server_fifo, select.POLLIN) in poll.poll(0):
                         msg, path_to_clientfifo = get_message(server_fifo).split(maxsplit=1)
                         response = get_surname_from_db(int(msg))
                         send_response(response, path_to_clientfifo)

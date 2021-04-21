@@ -22,8 +22,8 @@ def get_response_from_server(CLIENT_FIFO):
     poll.register(fifo, select.POLLIN)
     try:
         while True:
-            # Check if there's data to read. Timeout after 1 sec.
-            if (fifo, select.POLLIN) in poll.poll(5000):
+            # Check if there's data to read.
+            if (fifo, select.POLLIN) in poll.poll(0):
                 print(get_message(fifo))
                 break
     finally:
